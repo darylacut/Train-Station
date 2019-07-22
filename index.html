@@ -59,8 +59,8 @@
             Current Schedule
         </div>
         <div class="card-body">
-            
-        </div>
+          <div id='TrainData'>
+          </div>
         </div>
   </div>
   <br>
@@ -106,11 +106,28 @@
   $('#SubmitInfoBtn').on('click', function(event) {
     event.preventDefault();
 
+    // assigning values to variables for input
     trainName = $('#TrainNameInputBox').val().trim();
     destination = $('#DestinationInputBox').val().trim();
     firstTrain = $('#FirstTrainInputBox').val().trim();
     frequency = $('#FrequencyInputBox').val().trim();
+
+    database.ref().set({
+      trainName: trainName,
+      destination: destination,
+      firstTrain: firstTrain,
+      frequency: frequency
+    });
+
   });
+
+  // function to check changes in values
+  database.ref().on('value', function(snapshot) {
+
+  // assigning the change in values to show in the HTML
+    $('#')
+
+  })
 
 </script>
 
