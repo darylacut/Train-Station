@@ -73,5 +73,13 @@ body {
 
 .inputLabels {
     font-weight: 500;
+}
 
+#TrainDataHeader {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+#TrainData {
+    text-align: justify;
 }
