@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+      <title>Train Scheduler</title>
+</head>
+<body>
+  
+  <div class="container">
+    <div class="card-header" id="LRTHeaderDiv">
+        <img src="https://www.iconsdb.com/icons/preview/white/train-2-xxl.png" id="TrainImage">
+        Light Railway Transit Scheduler
+    </div>
+    <embed src="BuildingMode2.mp3" autostart="true" loop="true" hidden="true">
+    <div class="card">
+            <div class="card-top" id="AddTrainDiv">
+                <img src="https://www.iconsdb.com/icons/preview/white/plus-2-xxl.png" class="BodyImages">
+              Add Train
+            </div>
+            <br>
+            <form>
+                    <div class="form-group">
+                      <label for="TrainNameInputBox" class="inputLabels">Train Name</label>
+                      <input type="text" class="form-control" id="TrainNameInputBox" placeholder="enter train name">
+                    </div>
+  
+                    <div class="form-group">
+                      <label for="DestinationInputBox" class="inputLabels">Destination</label>
+                      <input type="text" class="form-control" id="DestinationInputBox" placeholder="enter destination">
+                    </div>
+                        
+                    <div class="form-group">
+                        <label for="FirstTrainInputBox" class="inputLabels">First Train Time (HH:mm - military time)</label>
+                        <input type="time" class="form-control" id="FirstTrainInputBox">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="FrequencyInputBox" class="inputLabels">Frequency (min)</label>
+                      <input type="number" class="form-control" id="FrequencyInputBox">
+                    </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <img src="https://www.iconsdb.com/icons/preview/white/search-3-xxl.png" class="BodyImages"> Submit</button>
+  
+                        <button type="submit" class="btn btn-primary">
+                            <img src="https://www.iconsdb.com/icons/preview/white/delete-xxl.png" class="BodyImages"> Clear Results</button>
+                  </form>
+                </div>
+                <br>
+                <br>
+
+  <div class="card">
+        <div class="card-top" id="CurrentScheduleDiv">
+            <img src="https://www.iconsdb.com/icons/preview/white/clock-xxl.png" class="BodyImages">
+            Current Schedule
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+            <p>Article Title</p>
+            <footer class="blockquote-footer">Article author <cite title="Source Title">Newspaper</cite></footer>
+            </blockquote>
+        </div>
+        </div>
+        
+  </div>
+  
+  <br>
+  <br>
+  
+  </div>
+  
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- Firebase Links -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+<script>
+  // Web app Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCMoXKit_js0vOsE8i2EDneFoG8Lm-7B-E",
+    authDomain: "train-scheduler-30164.firebaseapp.com",
+    databaseURL: "https://train-scheduler-30164.firebaseio.com",
+    projectId: "train-scheduler-30164",
+    storageBucket: "",
+    messagingSenderId: "832210392954",
+    appId: "1:832210392954:web:1b5cd7c43cf03dde"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+
+</body>
+</html>

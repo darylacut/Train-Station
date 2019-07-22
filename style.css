@@ -1,0 +1,77 @@
+body {
+    background-image: url('ws_Train_Station_at_Night_1680x1050.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+#LRTHeaderDiv {
+    text-align: center;
+    padding: 50px 100px;
+    color: white;
+    background-color:rgb(0,0,0,0);
+    font-size: 40px;
+    font-weight: 600;
+}
+
+#TrainImage {
+    height: 40px;
+    weight: 40px;
+}
+
+.BodyImages {
+    height: 20px;
+    weight: 20px;
+}
+
+.card {
+    background-color: rgb(0,0,0,0);
+    color: white;
+}
+
+#AddTrainDiv {
+    padding: 0px 100px;
+    text-align: center;
+    color: white;
+    background-color:rgb(255,255,255,0.2);
+    font-size: 25px;
+    font-weight: 600;
+}
+
+#CurrentScheduleDiv {
+    padding: 0px 100px;
+    text-align: center;
+    color: white;
+    background-color:rgb(255,255,255,0.2);
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.card {
+    border: 5px;
+    border: solid;
+}
+
+.form-group,
+.input-group,
+#input-label {
+    padding: 5px 20px;
+}
+
+.form-control {
+    background-color: rgb(0,0,0,0.6);
+    color: grey;
+}
+
+.btn {
+    margin: 0px 0px 20px 20px;
+    background-color: rgba(141, 166, 166, 0.637);
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.inputLabels {
+    font-weight: 500;
+
+}
