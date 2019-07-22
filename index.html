@@ -13,13 +13,13 @@
   
   <div class="container">
     <div class="card-header" id="LRTHeaderDiv">
-        <img src="https://www.iconsdb.com/icons/preview/white/train-2-xxl.png" id="TrainImage">
+        <img src="https://www.iconsdb.com/icons/preview/white/train-2-xxl.png" id="TrainImage"> 
         Light Railway Transit Scheduler
-    </div>
+      </div>
     <embed src="BuildingMode2.weba" autostart="true" loop="true" hidden="true">
     <div class="card">
             <div class="card-top" id="AddTrainDiv">
-                <img src="https://www.iconsdb.com/icons/preview/white/plus-2-xxl.png" class="BodyImages">
+              <img src="https://www.iconsdb.com/icons/preview/white/plus-2-xxl.png" class="BodyImages">
               Add Train
             </div>
             <br>
@@ -44,7 +44,7 @@
                       <input type="number" class="form-control" id="FrequencyInputBox">
                     </div>
                         
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" id='SubmitInfoBtn' class="btn btn-primary">
                             <img src="https://www.iconsdb.com/icons/preview/white/search-3-xxl.png" class="BodyImages"> Submit</button>
   
                         <button type="submit" class="btn btn-primary">
@@ -53,7 +53,6 @@
                 </div>
                 <br>
                 <br>
-
   <div class="card">
         <div class="card-top" id="CurrentScheduleDiv">
             <img src="https://www.iconsdb.com/icons/preview/white/clock-xxl.png" class="BodyImages">
@@ -63,17 +62,17 @@
             
         </div>
         </div>
-        
   </div>
-  
   <br>
   <br>
-  
   </div>
   
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- Moment JS -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
   <!-- Firebase Links -->
   <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
@@ -93,6 +92,25 @@
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+  // a variable that references the firebase database
+  var database = firebase.database();
+
+  // variables for train input values
+  var trainName = "";
+  var destination = "";
+  var firstTrain = 0;
+  var frequency = "";
+
+  // giving the button a click function
+  $('#SubmitInfoBtn').on('click', function(event) {
+    event.preventDefault();
+
+    trainName = $('#TrainNameInputBox').val().trim();
+    destination = $('#DestinationInputBox').val().trim();
+    firstTrain = $('#FirstTrainInputBox').val().trim();
+    frequency = $('#FrequencyInputBox').val().trim();
+  });
 
 </script>
 
