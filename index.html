@@ -112,6 +112,7 @@
     firstTrain = $('#FirstTrainInputBox').val().trim();
     frequency = $('#FrequencyInputBox').val().trim();
 
+    // changing the values saved in firebase database
     database.ref().set({
       trainName: trainName,
       destination: destination,
@@ -125,7 +126,10 @@
   database.ref().on('value', function(snapshot) {
 
   // assigning the change in values to show in the HTML
-    $('#')
+    $('#TrainData').text(snapshot.val().trainName + " | "
+                       + snapshot.val().destination + " | "
+                       + snapshot.val().firstTrain + " | " 
+                       + snapshot.val().frequency);
 
   })
 
