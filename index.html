@@ -10,7 +10,7 @@
       <title>Train Scheduler</title>
 </head>
 <body>
-  
+  <!---------   HEADER DIV ------------>
   <div class="container">
     <div class="card-header" id="LRTHeaderDiv">
         <img src="https://www.iconsdb.com/icons/preview/white/train-2-xxl.png" id="TrainImage"> 
@@ -62,15 +62,19 @@
         <div class="card-body">
           <div id='TrainDataHeader' class='form-row'>
               <div class="col-sm-3">TRAIN</div>
-              <div class="col-sm-3">DESTINATION</div>
-              <div class="col-sm-3">TIME</div>
-              <div class="col-sm-3">FREQUENCY</div>
+              <div class="col-sm-2">DESTINATION</div>
+              <div class="col-sm-2">TIME</div>
+              <div class="col-sm-2">FREQUENCY</div>
+              <div class="col-sm-2">NEXT ARRIVAL</div>
+              <div class="col-sm-1">MINS AWAY</div>
           </div>
           <br>
           <div id='TrainData' class='form-row'>
               <div class="col-sm-3" id='TrainNameDisplay'></div>
               <div class="col-sm-3" id='DestinationDisplay'></div>
               <div class="col-sm-3" id='TimeDisplay'></div>
+              <div class="col-sm-3" id='FrequencyDisplay'></div>
+              <div class="col-sm-3" id='FrequencyDisplay'></div>
               <div class="col-sm-3" id='FrequencyDisplay'></div>
           </div>
         </div>
@@ -101,29 +105,23 @@
     messagingSenderId: "832210392954",
     appId: "1:832210392954:web:1b5cd7c43cf03dde"
   };
-
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
   // a variable that references the firebase database
   var database = firebase.database();
-
   // variables for train input values
   var trainName = "";
   var destination = "";
   var firstTrain = 0;
   var frequency = "";
-
   // giving the button a click function
   $('#SubmitInfoBtn').on('click', function(event) {
     event.preventDefault();
-
     // assigning values to variables for input
     trainName = $('#TrainNameInputBox').val().trim();
     destination = $('#DestinationInputBox').val().trim();
     firstTrain = $('#FirstTrainInputBox').val().trim();
     frequency = $('#FrequencyInputBox').val().trim();
-
     // changing the values saved in firebase database
     database.ref().push({
       trainName: trainName,
@@ -131,20 +129,15 @@
       firstTrain: firstTrain,
       frequency: frequency
     });
-
   });
-
   // function to check changes in values
   database.ref().on('child_added', function(snapshot) {
-
   // assigning the change in values to show in the HTML
     $('#TrainNameDisplay').append("<div class='NameData'>" + snapshot.val().trainName),
     $('#DestinationDisplay').append("<div class='DestinationData'>" + snapshot.val().destination),
     $('#TimeDisplay').append("<div class='TimeData'>" + snapshot.val().firstTrain), 
     $('#FrequencyDisplay').append("<div class='FrequencyData'>" + snapshot.val().frequency)
-
   });
-
 </script>
 
 </body>
