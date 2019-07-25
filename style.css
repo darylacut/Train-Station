@@ -27,6 +27,8 @@ body {
 .card {
     background-color: rgb(0,0,0,0);
     color: white;
+    border: 5px;
+    border: solid;
 }
 
 #AddTrainDiv {
@@ -45,11 +47,6 @@ body {
     background-color:rgb(255,255,255,0.2);
     font-weight: 600;
     font-size: 25px;
-}
-
-.card {
-    border: 5px;
-    border: solid;
 }
 
 .form-group,
@@ -82,5 +79,5 @@ body {
 }
 
 #TrainData {
-    text-align: justify;
+    text-align: center;
 }

@@ -16,7 +16,11 @@
         <img src="https://www.iconsdb.com/icons/preview/white/train-2-xxl.png" id="TrainImage"> 
         Light Railway Transit Scheduler
       </div>
+
+    <!-----------    added   music ---------->
     <embed src="BuildingMode2.weba" autostart="true" loop="true" hidden="true">
+
+      <!----------  div for form input group  ----------->
     <div class="card">
             <div class="card-top" id="AddTrainDiv">
               <img src="https://www.iconsdb.com/icons/preview/white/plus-2-xxl.png" class="BodyImages">
@@ -53,29 +57,35 @@
                 </div>
                 <br>
                 <br>
+
+        <!-----------div  for  displying  train  info  -------------->
   <div class="card">
         <div class="card-top" id="CurrentScheduleDiv">
             <img src="https://www.iconsdb.com/icons/preview/white/clock-xxl.png" class="BodyImages">
             Current Schedule
         </div>
         <br>
+
+        <!--------   train column header  ------------->
         <div class="card-body">
           <div id='TrainDataHeader' class='form-row'>
-              <div class="col-sm-3">TRAIN</div>
+              <div class="col-sm-2">TRAIN</div>
               <div class="col-sm-2">DESTINATION</div>
               <div class="col-sm-2">TIME</div>
-              <div class="col-sm-2">FREQUENCY</div>
+              <div class="col-sm-2">FREQUENCY (mins)</div>
               <div class="col-sm-2">NEXT ARRIVAL</div>
-              <div class="col-sm-1">MINS AWAY</div>
+              <div class="col-sm-2">MINS AWAY</div>
           </div>
           <br>
+
+          <!--------   train column data  ------------->
           <div id='TrainData' class='form-row'>
-              <div class="col-sm-3" id='TrainNameDisplay'></div>
-              <div class="col-sm-3" id='DestinationDisplay'></div>
-              <div class="col-sm-3" id='TimeDisplay'></div>
-              <div class="col-sm-3" id='FrequencyDisplay'></div>
-              <div class="col-sm-3" id='FrequencyDisplay'></div>
-              <div class="col-sm-3" id='FrequencyDisplay'></div>
+              <div class="col-sm-2" id='TrainNameDisplay'></div>
+              <div class="col-sm-2" id='DestinationDisplay'></div>
+              <div class="col-sm-2" id='TimeDisplay'></div>
+              <div class="col-sm-2" id='FrequencyDisplay'></div>
+              <div class="col-sm-2" id='ArrivalDisplay'></div>
+              <div class="col-sm-2" id='MinsDisplay'></div>
           </div>
         </div>
   </div>
@@ -95,6 +105,7 @@
   <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
 <script>
+
   // Web app Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyCMoXKit_js0vOsE8i2EDneFoG8Lm-7B-E",
@@ -105,16 +116,20 @@
     messagingSenderId: "832210392954",
     appId: "1:832210392954:web:1b5cd7c43cf03dde"
   };
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
   // a variable that references the firebase database
   var database = firebase.database();
+
   // variables for train input values
   var trainName = "";
   var destination = "";
   var firstTrain = 0;
   var frequency = "";
-  // giving the button a click function
+
+  // giving the submit button a click function
   $('#SubmitInfoBtn').on('click', function(event) {
     event.preventDefault();
     // assigning values to variables for input
@@ -130,13 +145,15 @@
       frequency: frequency
     });
   });
+
   // function to check changes in values
   database.ref().on('child_added', function(snapshot) {
-  // assigning the change in values to show in the HTML
+  // and then assigning the change in values to show in the HTML
     $('#TrainNameDisplay').append("<div class='NameData'>" + snapshot.val().trainName),
     $('#DestinationDisplay').append("<div class='DestinationData'>" + snapshot.val().destination),
     $('#TimeDisplay').append("<div class='TimeData'>" + snapshot.val().firstTrain), 
     $('#FrequencyDisplay').append("<div class='FrequencyData'>" + snapshot.val().frequency)
+    
   });
 </script>
 
