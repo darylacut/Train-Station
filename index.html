@@ -40,12 +40,12 @@
                         
                     <div class="form-group">
                         <label for="FirstTrainInputBox" class="inputLabels">First Train Time (HH:mm - military time)</label>
-                        <input type="time" class="form-control" id="FirstTrainInputBox">
+                        <input type="text" class="form-control" id="FirstTrainInputBox" placeholder="HH:mm">
                     </div>
                     
                     <div class="form-group">
                       <label for="FrequencyInputBox" class="inputLabels">Frequency (min)</label>
-                      <input type="number" class="form-control" id="FrequencyInputBox">
+                      <input type="text" class="form-control" id="FrequencyInputBox" placeholder="enter minutes">
                     </div>
                         
                         <button type="submit" id='SubmitInfoBtn' class="btn btn-primary">
@@ -128,34 +128,10 @@
   var destination = "";
   var firstTrain = 0;
   var frequency = 0;
-  var minsRemaining = 0;
-  var arrivalTime = 0;
+ // var minsRemaining = "";
+  //  var arrivalTime = ""
 
-
-// giving the submit button a click function
-  $('#SubmitInfoBtn').on('click', function(event) {
-    event.preventDefault();
-    // assigning values to variables for input
-    trainName = $('#TrainNameInputBox').val().trim();
-    destination = $('#DestinationInputBox').val().trim();
-    firstTrain = $('#FirstTrainInputBox').val().trim();
-    frequency = $('#FrequencyInputBox').val().trim();
-  
-    // changing the values saved in firebase database
-    database.ref().push({
-      trainName: trainName,
-      destination: destination,
-      firstTrain: firstTrain,
-      frequency: frequency,
-    });
-  });
-
-
-
- // function to check changes in values
- database.ref().on('child_added', function(snapshot) {
-
-  //variables for calculation
+//variables for calculation
       // this is the time right now
       var currentTime = moment();
 
@@ -163,7 +139,7 @@
       var firstTrainConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
 
       // difference between the time now and the time since the first scheduled train, expressed in minutes
-      var timeDiff = moment().diff(moment(firstTrainConverted), 'minutes');
+      var timeDiff = moment().diff(moment(firstTrainConverted), "minutes");
 
       // this can be interpreted as how many minutes have passed since the last scheduled train departed
       // we get this by using the modulus calculation, whichs shows the remainder instead of the quotient
@@ -176,13 +152,40 @@
       var arrivalTime = moment().add(minsRemaining, "minutes");
 
 
+// giving the submit button a click function
+  $('#SubmitInfoBtn').on('click', function(event) {
+    event.preventDefault();
+   
+    // assigning values to variables from input
+    trainName = $('#TrainNameInputBox').val().trim();
+    destination = $('#DestinationInputBox').val().trim();
+    firstTrain = $('#FirstTrainInputBox').val().trim();
+    frequency = $('#FrequencyInputBox').val().trim();
+  
+   // changing the values saved in firebase database
+   database.ref().push({
+      trainName: trainName,
+      destination: destination,
+      firstTrain: firstTrain,
+      frequency: frequency,
+      minsRemaining: minsRemaining,
+      arrivalTime: arrivalTime,
+    });
+  
+  });
+
+
+
+ // function to check changes in values
+ database.ref().on('child_added', function(snapshot) {
+
   // and then assigning the change in values to show in the HTML
     $('#TrainNameDisplay').append("<div class='NameData'>" + snapshot.val().trainName),
     $('#DestinationDisplay').append("<div class='DestinationData'>" + snapshot.val().destination),
     $('#TimeDisplay').append("<div class='TimeData'>" + snapshot.val().firstTrain), 
     $('#FrequencyDisplay').append("<div class='FrequencyData'>" + snapshot.val().frequency)
-    $('#ArrivalDisplay').append("<div class='ArrivalData'>" + snapshot.val().arrivalTime),
-    $('#MinsDisplay').append("<div class='MinsData'>" + snapshot.val().minsRemaining)
+    $('#ArrivalDisplay').append("<div class='ArrivalData'>" + arrivalTime),
+    $('#MinsDisplay').append("<div class='MinsData'>" + minsRemaining)
 
   });
 
