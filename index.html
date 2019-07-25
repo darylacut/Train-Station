@@ -129,7 +129,29 @@
   var firstTrain = 0;
   var frequency = "";
 
-  // giving the submit button a click function
+  //variables for calculation
+      // this is the time right now
+      var currentTime = moment();
+
+      // converting the time of arrival of the first train pushed a year back to make sure it is registered as coming from a previous time
+      var firstTrainConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+
+      // difference between the time now and the time since the first scheduled train, expressed in minutes
+      var timeDiff = moment().diff(moment(firstTrainConverted), "minutes");
+
+      // this can be interpreted as how many minutes have passed since the last scheduled train departed
+      // we get this by using the modulus calculation, whichs shows the remainder instead of the quotient
+      var remainder = timeDiff % frequency;
+
+      // subtracting how frequent the train is from how many minutes have passed since the last train departed gives us the minutes left til the next train arrives
+      var minsRemaining = frequency - remainder;
+
+      // now we express in hours and mins the time of arrival of the next train
+      var arrivalTime = moment().add(minsRemaining, 'minutes');
+
+
+
+// giving the submit button a click function
   $('#SubmitInfoBtn').on('click', function(event) {
     event.preventDefault();
     // assigning values to variables for input
@@ -142,9 +164,12 @@
       trainName: trainName,
       destination: destination,
       firstTrain: firstTrain,
-      frequency: frequency
+      frequency: frequency,
+     // minsRemaining: minsRemaining,
+     // arrivalTime: arrivalTime
     });
   });
+
 
   // function to check changes in values
   database.ref().on('child_added', function(snapshot) {
@@ -153,7 +178,9 @@
     $('#DestinationDisplay').append("<div class='DestinationData'>" + snapshot.val().destination),
     $('#TimeDisplay').append("<div class='TimeData'>" + snapshot.val().firstTrain), 
     $('#FrequencyDisplay').append("<div class='FrequencyData'>" + snapshot.val().frequency)
-    
+    //$('#ArrivalDisplay').append("<div class='ArrivalData'>" + arrivalTime),
+    //$('#f')
+
   });
 </script>
 
