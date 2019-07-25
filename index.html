@@ -168,8 +168,8 @@
       destination: destination,
       firstTrain: firstTrain,
       frequency: frequency,
-      minsRemaining: minsRemaining,
-      arrivalTime: arrivalTime,
+     // minsRemaining: minsRemaining,
+     // arrivalTime: arrivalTime,
     });
   
   });
@@ -178,6 +178,29 @@
 
  // function to check changes in values
  database.ref().on('child_added', function(snapshot) {
+
+      // this is the time right now
+      var currentTime = moment();
+
+      // variables for first train and frequency of every train updated to change with every change in data input
+      var firstTrain = snapshot.val().firstTrain;
+      var frequency = snapshot.val().frequency;
+
+      // converting the time of arrival of the first train pushed a year back to make sure it is registered as coming from a previous time
+      var firstTrainConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+
+      // difference between the time now and the time since the first scheduled train, expressed in minutes
+      var timeDiff = moment().diff(moment(firstTrainConverted), "minutes");
+
+      // this can be interpreted as how many minutes have passed since the last scheduled train departed
+      // we get this by using the modulus calculation, whichs shows the remainder instead of the quotient
+      var remainder = timeDiff % frequency;
+
+      // subtracting how frequent the train is from how many minutes have passed since the last train departed gives us the minutes left til the next train arrives
+      var minsRemaining = frequency - remainder;
+
+      // now we express in hours and mins the time of arrival of the next train
+      var arrivalTime = moment().add(minsRemaining, "minutes").format("HH:mm");
 
   // and then assigning the change in values to show in the HTML
     $('#TrainNameDisplay').append("<div class='NameData'>" + snapshot.val().trainName),
